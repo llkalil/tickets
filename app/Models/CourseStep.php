@@ -10,11 +10,17 @@ class CourseStep extends Model
     use HasFactory;
 
     const TYPE_VIDEO = 'video';
+
     const TYPE_ACTIVITY = 'activity';
+
     const TYPE_ARTICLE = 'article';
+
     const ICON_TYPE_VIDEO = 'la-video';
+
     const ICON_TYPE_ACTIVITY = 'la-clipboard-check';
+
     const ICON_TYPE_ARTICLE = 'la-file-alt';
+
     protected $fillable = [
         'course_id',
         'slug',

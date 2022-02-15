@@ -34,12 +34,11 @@ class Course extends Model
 
     public function activeSteps()
     {
-        return $this->hasMany(CourseStep::class)->where('is_active',true);
+        return $this->hasMany(CourseStep::class)->where('is_active', true);
     }
-
 
     public function teacher()
     {
-        return $this->hasOne(User::class,'id','teacher_id');
+        return $this->hasOne(User::class, 'id', 'teacher_id');
     }
 }

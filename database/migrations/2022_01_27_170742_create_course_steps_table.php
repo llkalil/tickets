@@ -24,7 +24,7 @@ class CreateCourseStepsTable extends Migration
 
             $table->foreignIdFor(Video::class)->nullable();
 
-            $table->string("subtitle")->nullable();
+            $table->string('subtitle')->nullable();
             $table->longText('contents')->nullable();
 
             $table->text('question_title')->nullable();

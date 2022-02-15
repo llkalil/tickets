@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Classes;
-
 
 use Illuminate\Support\HtmlString;
 use Rappasoft\LaravelLivewireTables\Views\Column;
@@ -10,7 +8,9 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 class Action extends Column
 {
     public bool $asDropdown = false;
+
     protected $buttons = [];
+
     protected $button = '';
 
     public function __construct(string $text = null, string $column = null)
@@ -22,6 +22,7 @@ class Action extends Column
     public function asDropdown()
     {
         $this->asDropdown = true;
+
         return $this;
     }
 
@@ -37,29 +38,27 @@ class Action extends Column
 
         $value = data_get($row, $columnName);
 
-        if (!$this->asDropdown && count($this->buttons) >= 1 ) {
-
+        if (! $this->asDropdown && count($this->buttons) >= 1) {
             collect($this->buttons)->each(function ($button) use ($column, $row, $value) {
                 $this->button .= call_user_func($button, $value, $column, $row);
             });
-
 
             $this->asHtml = true;
 
             $result = new HtmlString($this->button);
             $this->button = '';
+
             return $result;
-        }else{
+        } else {
             return $this->buildDropdown($row, $column, $value);
         }
-
     }
 
     /**
      * @param null $callback
      * @return $this
      */
-    public function addButton($callback = null): Action
+    public function addButton($callback = null): self
     {
         $this->buttons[] = $callback;
 
@@ -72,6 +71,6 @@ class Action extends Column
             return call_user_func($button, $value, $column, $row);
         });
 
-        return new HtmlString(view('components.table-dropdown.base',compact('buttons'))->render());
+        return new HtmlString(view('components.table-dropdown.base', compact('buttons'))->render());
     }
 }

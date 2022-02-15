@@ -1,18 +1,23 @@
 <?php
 
-
 namespace App\Classes;
-
 
 class Button
 {
     public $modalName = false;
+
     protected $html = '';
+
     protected $action = null;
+
     protected $actionType = '';
+
     protected $color;
+
     protected $text;
+
     protected $classes = 'text-gray-600 px-3 hover:bg-gray-200 transition py-3 hover:text-gray-700 mr-2';
+
     protected $actionParams;
 
     public function __construct($text)
@@ -20,6 +25,7 @@ class Button
         $this->text = $text;
         $this->color = 'green';
     }
+
     public function __toString()
     {
         return $this->create();
@@ -33,36 +39,38 @@ class Button
     public function icon($name)
     {
         $this->text = "<i class='text-xl la $name'></i>";
+
         return $this;
     }
 
     public function text($text)
     {
         $this->text = $text;
-        return $this;
 
+        return $this;
     }
 
     public function link($href)
     {
         $this->action = $href;
         $this->actionType = 'link';
-        return $this;
 
+        return $this;
     }
 
     public function action($action)
     {
         $this->action = $action;
         $this->actionType = 'function';
-        return $this;
 
+        return $this;
     }
 
     public function openModal($component_name, ...$params)
     {
         $this->modalName = $component_name;
         $this->emit('openModal', $params);
+
         return $this;
     }
 
@@ -71,6 +79,7 @@ class Button
         $this->action = $event;
         $this->actionType = 'event';
         $this->actionParams = func_get_arg(1);
+
         return $this;
     }
 
@@ -78,30 +87,32 @@ class Button
     {
         if ($this->actionType == null) {
             $this->html = $this->text;
-        } else if ($this->actionType == 'link') {
+        } elseif ($this->actionType == 'link') {
             $this->html = "<a class='{$this->getClass()}' href='{$this->action}'>{$this->text}</a>";
-        } else if ($this->actionType == 'action') {
+        } elseif ($this->actionType == 'action') {
             $this->html = "<button class='{$this->getClass()}' @click='{$this->action}'>{$this->text}</button>";
-        } else if ($this->actionType == 'event') {
+        } elseif ($this->actionType == 'event') {
             //dd($this->actionParams);
-            $event_params = !empty($this->actionParams) ? ',' . json_encode($this->actionParams) : '';
+            $event_params = ! empty($this->actionParams) ? ','.json_encode($this->actionParams) : '';
             if ($this->modalName) {
                 $this->html = "<button class='{$this->getClass()}' @click='window.Livewire.emit(\"{$this->action}\",\"{$this->modalName}\"{$event_params})'>{$this->text}</button>";
             } else {
                 $this->html = "<button class='{$this->getClass()}' @click='window.Livewire.emit(\"{$this->action}\"{$event_params})'>{$this->text}</button>";
             }
         }
+
         return $this->html;
     }
 
     protected function getClass()
     {
-        return str_replace(":color", $this->color, $this->classes);
+        return str_replace(':color', $this->color, $this->classes);
     }
 
     public function color(string $string)
     {
         $this->color = $string;
+
         return $this;
     }
 }

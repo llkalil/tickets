@@ -8,7 +8,9 @@ use LivewireUI\Modal\ModalComponent;
 class Create extends ModalComponent
 {
     public $title;
+
     public $is_active;
+
     public $is_correct;
 
     public function render()

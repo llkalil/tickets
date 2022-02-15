@@ -9,15 +9,16 @@ use Livewire\Component;
 class Create extends Component
 {
     public Course $savedCourse;
+
     public int $course_id = 0;
 
     public string $title = '';
-    public string $description = '';
 
+    public string $description = '';
 
     public function updated($prop_name, $prop_value)
     {
-        if ($this->course_id == 0){
+        if ($this->course_id == 0) {
             $this->savedCourse = Course::create([
                 'user_id' => auth()->id(),
                 'teacher_id' => auth()->id(),
@@ -30,8 +31,7 @@ class Create extends Component
             $this->course_id = $this->savedCourse->id;
             $this->emit('createdCourse', $this->course_id);
             $this->emitTo('livewire-toast', 'show', 'Este curso foi salvo como rascunho');
-
-        }else {
+        } else {
             $this->savedCourse->update([
                 'teacher_id' => auth()->id(),
                 'name' => $this->title,

@@ -58,7 +58,6 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', LogoutController::class)
         ->name('logout');
 
-
     Route::view('/dashboard', 'dashboard.index')->name('dashboard');
 
     //Route::get('/enter-requests', EnterRequests::class)->name('enter-requests');
@@ -68,5 +67,4 @@ Route::middleware('auth')->group(function () {
         Route::view('/drafts', 'pages.studio.drafts')->name('drafts');
         Route::view('/courses', 'pages.studio.courses')->name('courses');
     });
-
 });

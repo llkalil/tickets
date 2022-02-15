@@ -17,7 +17,7 @@ class CreateVideosTable extends Migration
             $table->id();
             $table->uuid('uuid')->nullable()->unique();
             $table->string('url');
-            $table->integer("duration");
+            $table->integer('duration');
             $table->string('file_name');
             $table->string('mime_type')->nullable();
             $table->unsignedBigInteger('size');

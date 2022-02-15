@@ -45,14 +45,11 @@ class User extends Authenticatable
 
     public function drafts()
     {
-        return $this->hasMany(Course::class)->where('is_draft',true);
-
+        return $this->hasMany(Course::class)->where('is_draft', true);
     }
 
     public function courses()
     {
         return $this->hasMany(Course::class);
     }
-
-
 }

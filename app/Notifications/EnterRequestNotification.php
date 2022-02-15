@@ -49,10 +49,10 @@ class EnterRequestNotification extends Notification
     {
         return (new MailMessage)
             ->success()
-            ->greeting('Olá' . $notifiable->name)
+            ->greeting('Olá'.$notifiable->name)
                     ->line('Um novo usuário solicitou a entrada em sua empresa!')
-                    ->line('O usuário ' . $this->user->name . ' está solicitando para entrar em sua empresa.')
-                    ->action('Clique aqui para aceitar', URL::signedRoute('enter-requests',['id' => $this->user->id]))
+                    ->line('O usuário '.$this->user->name.' está solicitando para entrar em sua empresa.')
+                    ->action('Clique aqui para aceitar', URL::signedRoute('enter-requests', ['id' => $this->user->id]))
                     ->line('Se você não conhecer o usuário ignore esta mensagem.');
     }
 
