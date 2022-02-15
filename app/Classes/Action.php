@@ -67,7 +67,7 @@ class Action extends Column
 
     private function buildDropdown($row, ?string $column, $value)
     {
-        $buttons = collect($this->buttons)->map(fn($button) => call_user_func($button, $value, $column, $row));
+        $buttons = collect($this->buttons)->map(fn ($button) => call_user_func($button, $value, $column, $row));
 
         return new HtmlString(view('components.table-dropdown.base', compact('buttons'))->render());
     }
