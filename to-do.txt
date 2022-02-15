@@ -1,0 +1,8 @@
+criar curso
+editar curso
+deletar curso
+thumb nos videos
+opção de upload de thumb
+edição de passos do curso
+exclusão de passos do curso
+adição de planos - composer require rennokki/plans
