@@ -16,9 +16,10 @@ class HasCompanyMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$request->user()->companies){
+        if (! $request->user()->companies) {
             redirect()->route('register.choose');
         }
+
         return $next($request);
     }
 }

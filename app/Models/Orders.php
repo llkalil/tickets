@@ -18,5 +18,4 @@ class Orders extends Model
         'payment_method',
         'paid_at',
     ];
-
 }

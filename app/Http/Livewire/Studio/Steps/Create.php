@@ -14,19 +14,24 @@ class Create extends Component
     public int $course_id = 0;
 
     public $alternatives = [];
+
     public $video;
 
     public $title;
-    public $type = "activity";
+
+    public $type = 'activity';
+
     public $subtitle;
+
     public $contents;
+
     public $question_title;
 
-
     protected $listeners = [
-        'createdCourse'      => "createdCourse",
-        'createdAlternative' => "createdAlternative",
+        'createdCourse'      => 'createdCourse',
+        'createdAlternative' => 'createdAlternative',
     ];
+
     private $video_id;
 
     public function createdCourse($course_id)
@@ -59,8 +64,8 @@ class Create extends Component
 
             $step = CourseStep::create($final_data);
 
-            $this->emit("stepCreated", $course_id);
-            $this->emitTo('livewire-toast', 'show', "Etapa salva com sucesso!");
+            $this->emit('stepCreated', $course_id);
+            $this->emitTo('livewire-toast', 'show', 'Etapa salva com sucesso!');
             $this->resetExcept('course_id');
         }
     }
@@ -68,20 +73,15 @@ class Create extends Component
     private function processType($course_step_data)
     {
         if ($this->type == CourseStep::TYPE_ACTIVITY) {
-
             $this->typeActivity();
             $course_step_data['question_title'] = $this->question_title;
-
         } elseif ($this->type == CourseStep::TYPE_VIDEO) {
-
             $course_step_data['video_id'] = $this->typeVideo();
             $course_step_data['contents'] = clean($this->contents);
-
         } elseif ($this->type == CourseStep::TYPE_ARTICLE) {
-
             $course_step_data['contents'] = clean($this->contents);
-
         }
+
         return $course_step_data;
     }
 
@@ -91,6 +91,7 @@ class Create extends Component
             $item['course_step_id'] = $this->course_id;
             $item['is_correct'] = boolval($item['is_correct']);
             $item['is_active'] = boolval($item['is_active']);
+
             return $item;
         })->each(function ($item) {
             Alternative::create($item);
@@ -99,7 +100,7 @@ class Create extends Component
 
     private function typeVideo()
     {
-        $path = 'media' . DIRECTORY_SEPARATOR . $this->course_id;
+        $path = 'media'.DIRECTORY_SEPARATOR.$this->course_id;
         $file = $this->video->store($path);
         if ($this->video->exists()) {
             return \App\Models\Video::create([

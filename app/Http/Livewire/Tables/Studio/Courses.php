@@ -11,23 +11,22 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class Courses extends DataTableComponent
 {
-
     public function columns(): array
     {
         return [
-            Column::make('Professor','teacher.name'),
-            Column::make('Título','name'),
-            Column::make('Descrição','description')->asHtml(),
-            Column::make('Duração','duration'),
-            Column::make('Ativo','is_active')->format(function ($value){
-                return view('components.tables.boolean',compact('value'));
+            Column::make('Professor', 'teacher.name'),
+            Column::make('Título', 'name'),
+            Column::make('Descrição', 'description')->asHtml(),
+            Column::make('Duração', 'duration'),
+            Column::make('Ativo', 'is_active')->format(function ($value) {
+                return view('components.tables.boolean', compact('value'));
             }),
-            Column::make('Passos ativos','active_steps_count'),
-            Action::make('Ações')->asDropdown()->addButton(function (){
+            Column::make('Passos ativos', 'active_steps_count'),
+            Action::make('Ações')->asDropdown()->addButton(function () {
                 return Button::make('Editar')->openModal('test');
-            })->addButton(function (){
+            })->addButton(function () {
                 return Button::make('Salvar')->openModal('test');
-            })->addButton(function (){
+            })->addButton(function () {
                 return Button::make('Outra coisa')->openModal('test');
             }),
         ];

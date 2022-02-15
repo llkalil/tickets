@@ -20,7 +20,7 @@ return [
             'warning' => 'yellow',
             'info' => 'blue',
             'error' => 'red',
-        ]
+        ],
     ],
     //Text Color used by TailwindCss class. If using color other than white or black, provide full color like red-300.
     'text_color' => 'white', //default is white
@@ -28,5 +28,5 @@ return [
     'transition' => true,  //default is true
     //Following transitions are supported:
     //appear_from_below, appear_from_above, appear_from_left, appear_from_right, zoom_in, rotate
-    'transition_type' => 'appear_from_right' //appear_from_above is default
+    'transition_type' => 'appear_from_right', //appear_from_above is default
 ];
