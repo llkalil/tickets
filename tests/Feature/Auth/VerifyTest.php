@@ -52,7 +52,7 @@ class VerifyTest extends TestCase
 
         Auth::login($user);
 
-        $url = URL::temporarySignedRoute('verification.verify', Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60)), [
+        $url = URL::temporarySignedRoute('verification.verify', Carbon::now()->addMinutes(config('auth.verification.expire', 60)), [
             'id' => $user->getKey(),
             'hash' => sha1($user->getEmailForVerification()),
         ]);
