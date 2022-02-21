@@ -37,4 +37,14 @@ class CourseStep extends Model
     {
         return $this->belongsTo(Course::class);
     }
+
+    public function alternatives()
+    {
+        return $this->hasMany(Alternative::class);
+    }
+
+    public function video()
+    {
+        return $this->belongsTo(Video::class);
+    }
 }

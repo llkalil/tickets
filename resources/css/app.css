@@ -1,8 +1,126 @@
-
+/**
+ * This injects Tailwind's base styles, which is a combination of
+ * Normalize.css and some additional base styles.
+ *
+ * You can see the styles here:
+ * https://unpkg.com/tailwindcss/dist/base.css
+ */
 @tailwind base;
+
+/**
+ * Remove the default box-shadow for invalid elements to prevent
+ * inputs in Livewire components showing with a
+ * red border by default in Firefox.
+ *
+ * See: https://github.com/laravel-frontend-presets/tall/issues/7
+ */
+input:invalid, textarea:invalid, select:invalid {
+    box-shadow: none;
+}
+
+/**
+ * This injects any component classes registered by plugins.
+ */
 @tailwind components;
+
+/**
+ * Here you would add any of your custom component classes; stuff that you'd
+ * want loaded *before* the utilities so that the utilities could still
+ * override them.
+ *
+ * Example:
+ *
+ * .btn { ... }
+ * .form-input { ... }
+ */
+
+/**
+ * This injects all of Tailwind's utility classes, generated based on your
+ * config file.
+ */
 @tailwind utilities;
+
+/**
+ * Here you would add any custom utilities you need that don't come out of the
+ * box with Tailwind.
+ *
+ * Example :
+ *
+ * .bg-pattern-graph-paper { ... }
+ * .skew-45 { ... }
+ */
+
+[x-cloak] {
+    display: none;
+}
+
+.filepond--credits{
+    display: none;
+}
+.filepond--root{
+    margin: 0!important;
+}
+
+
+.progress-bar-animated {
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 23%, transparent 27%, transparent 50%, rgba(255, 255, 255, 0.15) 53%, rgba(255, 255, 255, 0.15) 77%, transparent 77%, transparent);
+    background-size: 1rem 1rem;
+    -webkit-animation: progress-bar-stripes 1s linear infinite;
+    animation: progress-bar-stripes 1s linear infinite;
+}
+
+@keyframes progress-bar-stripes {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 1rem 0;
+    }
+}
+.fade-in {
+    animation: fade 1s ease-in-out;
+}
+
+@keyframes fade {
+    0% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+
+    }
+}
 
 button.primary.active{
     @apply bg-white border-2 inline-block border-indigo-600 text-indigo-600 !important;
+}
+
+.tippy-box[data-theme~=custom] {
+    @apply shadow-lg;
+    color: #26323d;
+    background-color: #fff
+}
+
+.tippy-box[data-theme~=custom][data-placement^=top] > .tippy-arrow:before {
+    border-top-color: #fff
+}
+
+.tippy-box[data-theme~=custom][data-placement^=bottom] > .tippy-arrow:before {
+    border-bottom-color: #fff
+}
+
+.tippy-box[data-theme~=custom][data-placement^=left] > .tippy-arrow:before {
+    border-left-color: #fff
+}
+
+.tippy-box[data-theme~=custom][data-placement^=right] > .tippy-arrow:before {
+    border-right-color: #fff
+}
+
+.tippy-box[data-theme~=custom] > .tippy-backdrop {
+    background-color: #fff
+}
+
+.tippy-box[data-theme~=custom] > .tippy-svg-arrow {
+    fill: #fff
 }

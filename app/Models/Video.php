@@ -9,14 +9,27 @@ class Video extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'uuid',
-        'url',
+        'disk',
+        'path',
+        'thumb_path',
         'duration',
-        'file_name',
+        'original_name',
         'mime_type',
         'size',
-        'created_at',
-        'updated_at',
+        'conversions',
+        'conversions_disk',
+        'converted_at',
+    ];
+
+    /**
+     * @var string[]
+     */
+    protected $casts = [
+        'conversions' => 'array',
     ];
 }

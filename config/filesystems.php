@@ -32,7 +32,33 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => public_path('app'),
+            'root' => storage_path('app'),
+        ],
+
+        'streamable_videos' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/upload/streamable'),
+            'url' => env('APP_URL').(('storage/upload/streamable')),
+            'visibility' => 'public',
+        ],
+        'converted_videos' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/upload/converted'),
+            'url' => env('APP_URL').(('storage/upload/converted')),
+            'visibility' => 'public',
+        ],
+        'thumbnails' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/upload/thumbnails'),
+            'url' => env('APP_URL').(('storage/upload/thumbnails')),
+            'visibility' => 'public',
+        ],
+
+        'streamable_videos_public' => [
+            'driver' => 'local',
+            'root' => public_path('app/public/upload/videos'),
+            'url' => env('APP_URL').(('storage/upload/videos')),
+            'visibility' => 'public',
         ],
 
         'public' => [

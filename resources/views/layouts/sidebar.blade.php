@@ -89,7 +89,7 @@
                                 </x-slot>
                                 Criar
                             </x-sidebar.item>
-                            <x-sidebar.item>
+                            <x-sidebar.item  route="studio.courses">
                                 <x-slot name="icon">
                                     <i class="la la-play-circle"></i>
                                 </x-slot>

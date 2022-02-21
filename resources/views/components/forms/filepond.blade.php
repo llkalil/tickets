@@ -1,4 +1,4 @@
-<div
+{{--<div
         wire:ignore
         x-data
         x-init="() => {
@@ -12,6 +12,43 @@
         });
     }"
 >
+
+</div>--}}
+
+
+<div wire:ignore
+     x-data="{ pond: null, wireId: null,  value: @entangle($attributes->wire('model')), oldValue: undefined }"
+     x-cloak
+     x-on:file-pond-clear.window="
+if (!this.wireId || $event.detail.id !== this.wireId) {
+    return;
+}
+
+pond.removeFile();
+"
+     x-init="
+$watch('value', value => {
+    !value && pond.removeFile();
+});
+$nextTick(function() {
+    pond = FilePond.create($refs.input, {
+
+        @if($attributes->whereStartsWith('wire:model'))
+             server: {
+                 process: (fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
+            @this.upload('{{ $attributes->whereStartsWith('wire:model')->first() }}', file, load, error, progress);
+            },
+            revert: (filename, load) => {
+                @this.removeUpload('{{ $attributes->whereStartsWith('wire:model')->first() }}', filename, load);
+            },
+        },
+        @endif
+
+             });
+         });
+"
+>
+
     <label class="block text-sm font-medium text-gray-700 leading-5 mt-2 mb-2">
         {{ $slot ?? '' }}
     </label>
@@ -20,7 +57,6 @@
     </div>
 
     @error($attributes->whereStartsWith('wire:model')->first())
-        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
     @enderror
 </div>
-

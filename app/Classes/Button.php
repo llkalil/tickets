@@ -16,7 +16,7 @@ class Button
 
     protected $text;
 
-    protected $classes = 'text-gray-600 px-3 hover:bg-gray-200 transition py-3 hover:text-gray-700 mr-2';
+    protected $classes = 'text-gray-600 px-3 whitespace-nowrap hover:bg-gray-200 transition py-3 hover:text-gray-700 mr-2';
 
     protected $actionParams;
 
@@ -69,7 +69,7 @@ class Button
     public function openModal($component_name, ...$params)
     {
         $this->modalName = $component_name;
-        $this->emit('openModal', $params);
+        $this->emit('openModal', func_get_arg(1));
 
         return $this;
     }

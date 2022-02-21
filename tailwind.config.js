@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors')
 
 module.exports = {
     theme: {
@@ -11,7 +12,13 @@ module.exports = {
     variants: {
         extend: {
             backgroundColor: ['active'],
+            colors: {
+                green: colors.emerald,
+                yellow: colors.amber,
+                purple: colors.violet,
+            }
         }
+
     },
     purge: {
         content: [

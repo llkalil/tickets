@@ -15,7 +15,7 @@
 
     <div class="relative overflow-hidden transition-all max-h-0 duration-700" style=""
          x-bind:style="selected === {{ $id }} ? 'max-height: ' + $el.scrollHeight + 'px' : ''">
-        <div class="p-6">
+        <div class="py-3 px-6">
             {!! $slot ??'' !!}
         </div>
     </div>

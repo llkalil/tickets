@@ -18,8 +18,8 @@ class Alternative extends Model implements HasMedia
         'is_active',
     ];
 
-    public function course()
+    public function courseStep()
     {
-        return $this->hasOne(Course::class);
+        return $this->hasOne(CourseStep::class);
     }
 }

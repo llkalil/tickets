@@ -22,16 +22,14 @@
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/shift-away.css"/>
+    <link href="https://unpkg.com/video.js/dist/video-js.min.css" rel="stylesheet">
 
-    <link
-            rel="stylesheet"
-            href="https://unpkg.com/tippy.js@6/themes/light.css"
-    />
 
-    @livewireStyles
-    @stack('styles')
+@livewireStyles
+@stack('styles')
 
-    <!-- Scripts -->
+<!-- Scripts -->
     <script src="{{ url(mix('js/app.js')) }}" defer></script>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
@@ -48,7 +46,6 @@
 @livewire('livewire-toast')
 <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
-@stack('scripts')
+<script src="https://unpkg.com/video.js/dist/video.min.js"></script>@stack('scripts')
 </body>
 </html>

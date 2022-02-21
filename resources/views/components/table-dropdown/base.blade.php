@@ -5,7 +5,8 @@
         content: $refs.template.innerHTML,
         trigger: 'click',
         placement: 'left',
-        theme: 'light',
+        theme: 'custom',
+        animation:'shift-away',
         interactive: true,
         allowHTML: true
     });">
@@ -14,7 +15,7 @@
             role="button" aria-label="option" {{--@click="isOpen = !isOpen"--}}>
         <i class="las la-ellipsis-h text-xl"></i>
     </button>
-    <div x-ref="template" style="display: none" class="w-32 bg-white rounded border shadow-lg py-2">
+    <div x-ref="template" style="display: none" class="min-w-32 bg-white rounded border shadow-lg py-2">
         @foreach($buttons as $button)
             <a href="#" @click="isOpen=false"
                class="block w-32 block {{ $loop->first?'':'border-t ' }} transition leading-tight hover:bg-gray-200">{!! $button !!}</a>

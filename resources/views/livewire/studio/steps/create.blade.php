@@ -1,4 +1,25 @@
 <div class="my-1 border border-gray-200 shadow-sm p-4 rounded-md" x-data="{ type: @entangle('type') }">
+    @if ($video_processing_job_status)
+        <div class="absolute fade-in bottom-2 z-40 left-2 bg-gray-50 p-4 pl-2 rounded shadow-lg flex items-center align-middle"
+             wire:poll="getVideoProcessingJobStatus('{{ $video_processing_job_status_id }}')">
+            <div class="w-1/6 p-2 flex justify-center items-center align-middle">
+                <i class="la la-clock text-4xl text-gray-400"></i>
+            </div>
+            <div class="w-5/6 pl-3 border-l">
+                <h1 class="text-md">
+                    Seu video está sendo processado...
+                </h1>
+                <div class="flex justify-between mb-1">
+                    <span class="text-base font-medium text-blue-700">Progresso:</span>
+                    <span class="text-sm font-medium text-blue-700">{{ $video_processing_job_status->progress_max !== 0 ? round(100 * $video_processing_job_status->progress_now / $video_processing_job_status->progress_max) : 0 }}%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5 ">
+                    <div class="bg-blue-600 h-2.5 rounded-full animate-pulse progress-bar-animated"
+                         style="width: {{ $video_processing_job_status->progress_max !== 0 ? round(100 * $video_processing_job_status->progress_now / $video_processing_job_status->progress_max) : 0 }}%"></div>
+                </div>
+            </div>
+        </div>
+    @endif
     <x-forms.input wire:model.lazy="title">
         Título
     </x-forms.input>
@@ -66,6 +87,25 @@
             <x-forms.filepond wire:model.lazy="video">
                 Video
             </x-forms.filepond>
+            <div class="flex gap-2 align-middle justify-center items-center">
+                <div class="w-2/3 mb-2">
+                    <x-forms.filepond wire:model.lazy="thumbnail">
+                        Poster <span class="text-sm text-gray-500"> (Thumbnail)</span>
+                    </x-forms.filepond>
+                    <span class="text-md text-gray-500 px-3">
+                            Recomendamos uma imagem com a mesma proporção do video
+                    </span>
+                </div>
+                <div class="w-1/3 m-1 mt-3 border-2 aspect-video border-dashed text-center flex align-middle justify-center items-center">
+                    @if ($thumbnail instanceof \Livewire\TemporaryUploadedFile)
+                        <img src="{{ $thumbnail->temporaryUrl() }}" class="w-100 fade-in aspect-video shadow" alt="preview">
+                    @else
+                        <span class="text-md text-gray-500 p-3">
+                            Escolha uma foto ao lado ou deixe em branco que <b>vamos gerar uma para você!</b>
+                        </span>
+                    @endif
+                </div>
+            </div>
         </div>
         <div x-show="type === 'article'">
             <x-forms.rte wire:model.lazy="contents">

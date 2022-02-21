@@ -23,6 +23,7 @@ class ShowAll extends Component
     public function render()
     {
         return view('livewire.studio.steps.show-all');
+
     }
 
     public function getSteps($course_id)
@@ -30,7 +31,7 @@ class ShowAll extends Component
         if ($course_id == null || $course_id == 0) {
             $this->steps = [];
         } else {
-            $this->steps = Course::find($course_id)->steps;
+            $this->steps = auth()->user()->courses->find($course_id)->steps;
         }
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Tables\Studio;
 
 use App\Classes\Action;
 use App\Classes\Button;
-use App\Classes\ButtonBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
@@ -18,9 +17,9 @@ class Courses extends DataTableComponent
             Column::make('Título', 'name'),
             Column::make('Descrição', 'description')->asHtml(),
             Column::make('Duração', 'duration'),
-            Column::make('Ativo', 'is_active')->format(fn ($value) => view('components.tables.boolean', compact('value'))),
+            Column::make('Ativo', 'is_active')->format(fn($value) => view('components.tables.boolean', compact('value'))),
             Column::make('Passos ativos', 'active_steps_count'),
-            Action::make('Ações')->asDropdown()->addButton(fn () => Button::make('Editar')->openModal('test'))->addButton(fn () => Button::make('Salvar')->openModal('test'))->addButton(fn () => Button::make('Outra coisa')->openModal('test')),
+            Action::make('Ações')->asDropdown()->addButton(fn() => Button::make('Editar')->openModal('test'))->addButton(fn() => Button::make('Salvar')->openModal('test'))->addButton(fn() => Button::make('Outra coisa')->openModal('test')),
         ];
     }
 

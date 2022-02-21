@@ -38,9 +38,13 @@ class Action extends Column
 
         $value = data_get($row, $columnName);
 
-        if (! $this->asDropdown && count($this->buttons) >= 1) {
+        if (!$this->asDropdown && count($this->buttons) <= 1) {
             collect($this->buttons)->each(function ($button) use ($column, $row, $value) {
-                $this->button .= call_user_func($button, $value, $column, $row);
+                if (is_callable($button)) {
+                    $this->button .= call_user_func($button, $value, $column, $row);
+                }else {
+                    $this->button .= "$button";
+                }
             });
 
             $this->asHtml = true;
@@ -54,21 +58,43 @@ class Action extends Column
         }
     }
 
+    private function buildDropdown($row, ?string $column, $value)
+    {
+
+        $buttons = collect($this->buttons)->map(function ($button) use ($value, $row, $column) {
+            if (is_callable($button)) {
+                return call_user_func($button, $value, $column, $row);
+            }else {
+                return "$button";
+            }
+        });
+
+        return new HtmlString(view('components.table-dropdown.base', compact('buttons'))->render());
+    }
+
     /**
      * @param null $callback
      * @return $this
      */
-    public function addButton($callback = null): self
+    public function addButton($callback): self
     {
         $this->buttons[] = $callback;
 
         return $this;
     }
 
-    private function buildDropdown($row, ?string $column, $value)
+    public function addButtons($callback): self
     {
-        $buttons = collect($this->buttons)->map(fn ($button) => call_user_func($button, $value, $column, $row));
+        if(is_callable($callback)) {
 
-        return new HtmlString(view('components.table-dropdown.base', compact('buttons'))->render());
+        }else{
+            collect($callback)->each(function ($value) {
+                $this->buttons[] = $value;
+            });
+        }
+
+
+
+        return $this;
     }
 }

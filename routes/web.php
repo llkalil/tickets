@@ -68,3 +68,6 @@ Route::middleware('auth')->group(function () {
         Route::view('/courses', 'pages.studio.courses')->name('courses');
     });
 });
+Route::get('/test', function () {
+    dd(\Illuminate\Support\Facades\Storage::disk('thumbnails')->exists('tmp/XUVVU1WM2tmLYVaOpfkMkZJLz0fBfd9E2ACJGyAH.png'));
+});
