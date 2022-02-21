@@ -1,4 +1,6 @@
-<?php /** @noinspection ALL */
+<?php
+
+/** @noinspection ALL */
 
 namespace App\Http\Livewire\Tables\Studio;
 
@@ -15,19 +17,19 @@ class Drafts extends DataTableComponent
         return [
             Column::make('Professor', 'teacher.name'),
             Column::make('Título', 'name'),
-            Column::make('Descrição', 'description')->format(fn($value) => strip_tags($value)),
+            Column::make('Descrição', 'description')->format(fn ($value) => strip_tags($value)),
             Column::make('Preço', 'price_real'),
             Column::make('Preço', 'price_market'),
             Column::make('Duração', 'duration'),
             Column::make('Etapas', 'steps_count'),
-            Column::make('Ativo', 'is_active')->format(fn($value) => view('components.tables.boolean', compact('value'))),
+            Column::make('Ativo', 'is_active')->format(fn ($value) => view('components.tables.boolean', compact('value'))),
             Action::make('Ações')
                 ->addButton(function ($value, $column, $row) {
                     return Button::make('Revisar')->openModal('modals.studio.revision', ['course_id' => $row->getKey()]);
                 })->addButton(function ($value, $column, $row) {
-                    return Button::make('Salvar')->openModal('modals.studio.save',['course_id' => $row->getKey()]);
+                    return Button::make('Salvar')->openModal('modals.studio.save', ['course_id' => $row->getKey()]);
                 })->addButton(function ($value, $column, $row) {
-                    return Button::make('Salvar e publicar')->openModal('modals.studio.save-publish',['course_id' => $row->getKey()]);
+                    return Button::make('Salvar e publicar')->openModal('modals.studio.save-publish', ['course_id' => $row->getKey()]);
                 }),
 
         ];

@@ -22,15 +22,15 @@ class ProcessVideo implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, Trackable;
 
     private Video $video;
-    private ?string $thumb_path;
 
+    private ?string $thumb_path;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Video $video,$thumb_path)
+    public function __construct(Video $video, $thumb_path)
     {
         $this->prepareStatus(['key' => $video->uuid->serialize()]);
         $this->video = $video;
@@ -51,7 +51,6 @@ class ProcessVideo implements ShouldQueue
             'webm' => $this->getFilenameFromFormat('webm'),
             'ogg' => $this->getFilenameFromFormat('ogv'),
         ];
-
 
         /*$video = FFMpeg::fromDisk($this->video->disk)
             ->open($this->video->path);
@@ -95,7 +94,7 @@ class ProcessVideo implements ShouldQueue
 
     private function getFilenameFromFormat($format)
     {
-        return 'converted_' . \Str::random(20) . '.' . $format;
+        return 'converted_'.\Str::random(20).'.'.$format;
     }
 
     /**
@@ -103,16 +102,17 @@ class ProcessVideo implements ShouldQueue
      */
     private function generateThumbnail(\ProtoneMedia\LaravelFFMpeg\MediaOpener $video): string
     {
-        $thumb_path = 'thumb_' . \Str::random(20) . '.png';
+        $thumb_path = 'thumb_'.\Str::random(20).'.png';
 
         if (Storage::disk('thumbnails')->exists($this->thumb_path)) {
-            Storage::disk('thumbnails')->rename($this->thumb_path,$thumb_path);
-        }else{
+            Storage::disk('thumbnails')->rename($this->thumb_path, $thumb_path);
+        } else {
             $video->getFrameFromSeconds(5)
                 ->export()
                 ->toDisk('thumbnails')
                 ->save($thumb_path);
         }
+
         return $thumb_path;
     }
 }
