@@ -23,7 +23,6 @@ class ShowAll extends Component
     public function render()
     {
         return view('livewire.studio.steps.show-all');
-
     }
 
     public function getSteps($course_id)

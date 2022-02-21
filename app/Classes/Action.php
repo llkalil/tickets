@@ -38,11 +38,11 @@ class Action extends Column
 
         $value = data_get($row, $columnName);
 
-        if (!$this->asDropdown && count($this->buttons) <= 1) {
+        if (! $this->asDropdown && count($this->buttons) <= 1) {
             collect($this->buttons)->each(function ($button) use ($column, $row, $value) {
                 if (is_callable($button)) {
                     $this->button .= call_user_func($button, $value, $column, $row);
-                }else {
+                } else {
                     $this->button .= "$button";
                 }
             });
@@ -60,11 +60,10 @@ class Action extends Column
 
     private function buildDropdown($row, ?string $column, $value)
     {
-
         $buttons = collect($this->buttons)->map(function ($button) use ($value, $row, $column) {
             if (is_callable($button)) {
                 return call_user_func($button, $value, $column, $row);
-            }else {
+            } else {
                 return "$button";
             }
         });
@@ -85,15 +84,12 @@ class Action extends Column
 
     public function addButtons($callback): self
     {
-        if(is_callable($callback)) {
-
-        }else{
+        if (is_callable($callback)) {
+        } else {
             collect($callback)->each(function ($value) {
                 $this->buttons[] = $value;
             });
         }
-
-
 
         return $this;
     }

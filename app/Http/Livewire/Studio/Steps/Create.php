@@ -16,16 +16,25 @@ class Create extends Component
     use WithFileUploads;
 
     public int $course_id = 0;
+
     public $alternatives = [];
+
     public $video_processing_job_status_id;
+
     public $video_processing_job_status;
 
     public $video;
+
     public $thumbnail;
+
     public $title;
+
     public $type = 'activity';
+
     public $subtitle;
+
     public $contents;
+
     public $question_title;
 
     protected $listeners = [
@@ -64,7 +73,6 @@ class Create extends Component
             $this->emitTo('livewire-toast',
                 'showWarning',
                 'Por favor, aguarde seu video ser processado antes de adicionar um novo.');
-
         } else {
             //$this->validate();
             CourseStep::create($this->mountDataForStepCreation($course_id));
@@ -89,8 +97,8 @@ class Create extends Component
             'type'      => $this->type,
             'is_active' => true,
         ];
-        return array_merge($course_step_data, $this->processType());
 
+        return array_merge($course_step_data, $this->processType());
     }
 
     /**
@@ -116,9 +124,6 @@ class Create extends Component
         return $return;
     }
 
-    /**
-     *
-     */
     private function createAlternatives(): void
     {
         $data = collect($this->alternatives)->map(function ($item) {
@@ -149,7 +154,6 @@ class Create extends Component
                 'size'          => $this->video->getSize(),
                 'thumb_path'    => $thumb_path,
             ]);
-
 
             $this->dispatchVideoProcessingJob($video, $thumb_path);
         }

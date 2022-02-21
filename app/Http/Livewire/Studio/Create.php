@@ -18,7 +18,7 @@ class Create extends Component
 
     public function updated()
     {
-        if (!$this->course_id) {
+        if (! $this->course_id) {
             $this->savedCourse = Course::create($this->mountDataForCourseCreation());
             $this->course_id = $this->savedCourse->id;
 
